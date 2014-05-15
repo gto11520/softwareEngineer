@@ -8,11 +8,6 @@
 
 package softwareEngineer;
 
-
-import java.util.Scanner;
-
-
-
 public class AccountList {
 
 
@@ -58,55 +53,51 @@ public class AccountList {
 		else
 			return null;
 	}
-
-	/**
-   edit the new user info through the JBDC connection to update information 
-   also includes password retrieval password retrieval
-   @param b user object will edited and then set.
-	 */
-	public static void updateAccountbyUser(User b){
-
-	}
-	/**
-   this forgotPassword method will construct a object that will consit of three items userid,name,and phone.
-   @return user object of forgotPassword which consist of userid , name and phone number.
-	 */
+	
 
 	@SuppressWarnings("static-access")
-	public static User resetPassword()
+
+	/**
+	 * resetPassword method will require you to verfiy your userid, name, and phonenumber 
+	 * @param customer user object will be stored and id
+	 * @return the retreival of database password to user 
+	 */
+	public static boolean resetPassword(String password, String id)
 	{
-		AccountInvoiceJDBC connect;
-		connect = new AccountInvoiceJDBC();
-		Scanner scan = new Scanner( System.in );
-		Scanner namescan = new Scanner( System.in );
+		if (AccountInvoiceJDBC.resetPassword(password, id) == true)
+			return true;
 
-		System.out.println("What is your userid?");
-		String userid = scan.nextLine();
-
-		System.out.println("What is your name?");
-		String name = namescan.nextLine();
-
-		System.out.println("What is your phone number?");
-		String phonenum = scan.nextLine();
-
-		User b = new User ( userid, name, phonenum); //new data
-		User a = new User(b); //updated
-		connect.updateAccountbyUser(b, a);
-
-		return b;
+		return false;
 	}//ends forgotPassword
 
 	/**
-   update account base on what the userid will input
-   @param customer1 and customer2 and
-   @return User object .
+	 * update account base on what the userid 
+	 * @param a: user object that will take in and jdbc will updateinfo 
+	 * @return boolean true if account has been updated or not .
 	 */
-	public static boolean updateAccountbyUser(User customer1, User customer2)
+	public static boolean updateAccountbyUser(User a)
 	{
 		
-		return true;
+		if (AccountInvoiceJDBC.updateAccountbyUser(a) == true)
+			return true;
+		else
+			return false;
+		
 	}
-	
+	/**
+	 * 
+	 * @param userid : passed by app class to checks userid and then jdbc query will remove
+	 * @return boolean true if account removal has been done
+	 */
+	@SuppressWarnings("static-access")
+	public static boolean deleteUserAccount (String userid) 
+	{
+		AccountInvoiceJDBC connect = null;
+		if (connect.deleteUserAccount(userid) == true)
+			return true;
+		
+		return false;
+	}
 	/**
 	 * @param id : passed by the userapp
 	 * @return true or false whether it is logged out
@@ -116,6 +107,77 @@ public class AccountList {
 	public static boolean logoutUser(String id){
 		AccountInvoiceJDBC connect= null;
 		if (connect.logoutUser(id) == true)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+    @param Staff object to retrieve employee info
+    @return true or false if staff has been connected to the db and the data has been stored
+	 */
+	@SuppressWarnings("static-access")
+	public static boolean createStaffAccount(Staff employee){
+
+		AccountInvoiceJDBC connect=null;
+		if (connect.createStaffAccount(employee) == true)
+			return true;
+		else
+			return false;		
+	}//ends addStaff
+
+	/**
+	@param String id , String pass : takes in id and password from the app class to verify the db 
+	@return true or false if connection has been connected to the db and the data has been verified 
+	 */
+	@SuppressWarnings("static-access")
+	public static Staff loginStaff(String id,String pass){
+
+		AccountInvoiceJDBC connect=null;
+		Staff a = connect.loginStaff(id, pass);
+		if (a != null)
+			return a;
+		else
+			return null;
+	}
+	
+
+	/**
+	 * update account base on what the userid 
+	 * @param a: Staff object that will take in and jdbc will updateinfo 
+	 * @return boolean true if account has been updated or not .
+	 */
+	public static boolean updateAccountbyStaff(Staff a)
+	{
+		
+		if (AccountInvoiceJDBC.updateAccountbyStaff(a) == true)
+			return true;
+		else
+			return false;
+		
+	}
+	/**
+	 * @param userid : passed by app class to checks userid and then jdbc query will remove
+	 * @return boolean true if account removal has been done
+	 */
+	@SuppressWarnings("static-access")
+	public static boolean deleteStaffAccount (String userid) 
+	{
+		AccountInvoiceJDBC connect = null;
+		if (connect.deleteStaffAccount(userid) == true)
+			return true;
+		
+		return false;
+	}
+	/**
+	 * @param id : passed by the userapp
+	 * @return true or false whether it is logged out
+	 */
+	
+	@SuppressWarnings("static-access")
+	public static boolean logoutStaff(String id){
+		AccountInvoiceJDBC connect= null;
+		if (connect.logoutStaff(id) == true)
 			return true;
 		else
 			return false;

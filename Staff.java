@@ -11,6 +11,8 @@ package softwareEngineer;
 public class Staff {//base class
         protected String name;
         protected boolean state;
+        protected String title;
+        protected String phoneNum;
         protected String id;
         protected String password;
 	
@@ -21,11 +23,27 @@ public class Staff {//base class
 	 * @param id the employee's id
 	 * @param password The employee's password
 	 */
-	public Staff(String id, String password,String name) 
+	public Staff(String id, String password,String name,String title,String phoneNum) 
 	{
 		this.id = id;
 		this.password = password;
 	    this.name = name;
+	    this.title =title;
+	    this.phoneNum =phoneNum;
+	}
+	/**
+	 * Staff object Non-Def constructor
+	 * @param name The employee's name
+	 * @param id the employee's id
+	 * @param password The employee's password
+	 * @param title the employee's title
+	 */
+	public Staff(String id, String password,String name,String phoneNum) 
+	{
+		this.id = id;
+		this.password = password;
+	    this.name = name;
+	    this.phoneNum =phoneNum;
 	}
 	
 	/**
@@ -58,6 +76,34 @@ public class Staff {//base class
 	{
 		return name;
 	}
+	
+	/**
+	 * Returns the title of the employee.
+	 * @return title
+	 */
+	public String getTitle() 
+	{
+		return title;
+	}
+	
+
+	/**
+	 * Returns the Phone number of the employee.
+	 * @return phoneNum
+	 */
+	public String getPhoneNum() 
+	{
+		return phoneNum;
+	}
+	/**
+	 * Changes the Phone Number of the user.
+	 * @param num new Number to be added.
+	 */
+	public void setPhoneNumber(String num) 
+	{
+		this.phoneNum = num;
+	}
+
 
 	/**
 	 * Changes the Name of the employee.
@@ -66,6 +112,14 @@ public class Staff {//base class
 	public void setName(String name) 
 	{
 		this.name = name;
+	}
+	/**
+	 * Changes the title of the user.
+	 * @param num new Number to be added.
+	 */
+	public void setTitle(String title) 
+	{
+		this.title = title;
 	}
 	
 	/**
@@ -121,9 +175,15 @@ public class Staff {//base class
 		this.id = id;
 	}
 
-        public String ToString() {
-            String msg = "";
-           msg = "Name: "+name;
+        public String toString() {
+        	String msg = "";
+    		if (getStatus() == true)
+    			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"Title: "+this.title +"\n"+"Phone Number: "+this.phoneNum +"\n"
+    					 +"\n"+ name +" is currently logged in\n";
+
+    		else
+    			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"Title: "+this.title +"\n"+"Phone Number: "+this.phoneNum +"\n"
+   					 +"\n"+ name +" is not currently logged in\n";
             return msg;
         }
 

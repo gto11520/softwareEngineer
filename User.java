@@ -38,7 +38,7 @@ public class User extends Staff{
 	 */
 	public User(String id, String password, String name, String address, String phoneNum,String paymentInfo) 
 	{
-		super(id,password,name);
+		super(id,password,name,phoneNum);
 		this.address = address;
 		this.phoneNum = phoneNum;
         this.paymentInfo=paymentInfo;
@@ -50,26 +50,26 @@ public class User extends Staff{
 	 * @param userid the user's password
 	 * To retrieve user id only
 	 */
-	public User(String id,String name,String phoneNum) 
+	public User(String name,String address,String phoneNum,String paymentInfo) 
 	{
-		this.id = id;
+		this.address = address;
 		this.name =name;
 		this.phoneNum = phoneNum;
-		
+		this.paymentInfo =paymentInfo;
 	}
 	/**
 	 * User Non-Default Constructor
-	 * @param aUser A User object that has been returned from JDBC.
+	 * @param tempUser A User object that has been returned from JDBC.
 	 */
-	public User(User aUser)
+	public User(User tempUser)
 	{
-		this.name = aUser.getName();
-		this.address = aUser.getAddress();
-		this.phoneNum = aUser.getPhoneNum();
-		this.id = aUser.getId();
-		this.password = aUser.getPassword();
-		this.paymentInfo=aUser.getPayment();
-		this.state = aUser.getStatus();
+		this.name = tempUser.getName();
+		this.address = tempUser.getAddress();
+		this.phoneNum = tempUser.getPhoneNum();
+		this.id = tempUser.getId();
+		this.password = tempUser.getPassword();
+		this.paymentInfo=tempUser.getPayment();
+		this.state = tempUser.getStatus();
 	}
 
 	
@@ -91,23 +91,6 @@ public class User extends Staff{
 		this.address = address;
 	}
 
-	/**
-	 * Returns the phone number of the user.
-	 * @return phoneNumber
-	 */
-	public String getPhoneNum() 
-	{
-		return phoneNum;
-	}
-
-	/**
-	 * Changes the Phone Number of the user.
-	 * @param num new Number to be added.
-	 */
-	public void setPhoneNumber(String num) 
-	{
-		this.phoneNum = num;
-	}
 
 	/**
 	 * Returns the Payment Info of the User.
@@ -130,14 +113,14 @@ public class User extends Staff{
 	 * toString method
 	 * return a id,name,address,phonenumber,paymentinfo
 	 */
-	public String ToString() {
+	public String toString() {
 		String msg = "";
 		if (getStatus() == true)
-			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"Address: "+this.address +"\n"+"Phone Number: "+this.phoneNum +"\n"
+			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"password: "+ password+"\n"+"Address: "+this.address +"\n"+"Phone Number: "+this.phoneNum +"\n"
 					+"Payment Info: "+this.paymentInfo +"\n"+ name +" is currently logged in\n";
 
 		else
-			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"Address: "+this.address +"\n"+"Phone Number: "+this.phoneNum +"\n"
+			msg = "UserId: "+this.id +"\n"+ "Name: "+name+"\n"+"password: "+ password+"\n"+"Address: "+this.address +"\n"+"Phone Number: "+this.phoneNum +"\n"
 					+"Payment Info: "+this.paymentInfo +"\n"+ name +" is currently not logged in\n";
 
 		return msg;
